@@ -1,4 +1,4 @@
-import component from './LovueDatepicker.vuegit ad'
+import component from './LovueDatepicker.vue'
 function install (Vue) {
   Vue.component(component.name, component)
 }
