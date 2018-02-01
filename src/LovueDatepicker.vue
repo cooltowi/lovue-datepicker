@@ -107,7 +107,7 @@ export default {
     },
     ok () {
       const $this = this
-      $this.$emit('input', Array.isArray($this.value) ? $this.dates : $this.dates[0])
+      $this.$emit('input', this.text);
       setTimeout(() => {
         $this.show = $this.range
       })
