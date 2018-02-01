@@ -1,58 +1,4 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "vue-datepicker-local",
-        "scope": null,
-        "escapedName": "vue-datepicker-local",
-        "name": "vue-datepicker-local",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
-      },
-      "/Users/admin/casemgr-frontend"
-    ]
-  ],
-  "_from": "vue-datepicker-local@latest",
-  "_id": "vue-datepicker-local@1.0.9",
-  "_inCache": true,
-  "_location": "/vue-datepicker-local",
-  "_nodeVersion": "6.10.1",
-  "_npmOperationalInternal": {
-    "host": "s3://npm-registry-packages",
-    "tmp": "tmp/vue-datepicker-local-1.0.9.tgz_1512639456943_0.6790475973393768"
-  },
-  "_npmUser": {
-    "name": "weifeiyue",
-    "email": "weifeiyue@meizu.com"
-  },
-  "_npmVersion": "5.5.1",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "vue-datepicker-local",
-    "scope": null,
-    "escapedName": "vue-datepicker-local",
-    "name": "vue-datepicker-local",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
-  },
-  "_requiredBy": [
-    "#DEV:/",
-    "#USER"
-  ],
-  "_resolved": "https://registry.npmjs.org/vue-datepicker-local/-/vue-datepicker-local-1.0.9.tgz",
-  "_shasum": "5883fc345b5a17a781ef2791492a882aa393eba5",
-  "_shrinkwrap": null,
-  "_spec": "vue-datepicker-local",
-  "_where": "/Users/admin/casemgr-frontend",
-  "author": {
-    "name": "weifeiyue",
-    "email": "weifeiyue@meizu.com"
-  },
-  "bugs": {
-    "url": "https://github.com/weifeiyue/vue-datepicker-local/issues"
-  },
   "dependencies": {
     "vue": "^2.5.2"
   },
@@ -78,11 +24,6 @@
     "webpack-dev-server": "^2.9.2"
   },
   "directories": {},
-  "dist": {
-    "integrity": "sha512-7HELsjRvlo79ZodaYm4jwlBtdQ7SMDnowQTk30zptHOxDDtu3X5ClXfkiWWisuUJ9YRKOreCEf8iQXzl8DztaA==",
-    "shasum": "5883fc345b5a17a781ef2791492a882aa393eba5",
-    "tarball": "https://registry.npmjs.org/vue-datepicker-local/-/vue-datepicker-local-1.0.9.tgz"
-  },
   "files": [
     "dist/**",
     "src/**",
@@ -98,22 +39,16 @@
   ],
   "license": "MIT",
   "main": "src/index.js",
-  "maintainers": [
-    {
-      "name": "weifeiyue",
-      "email": "weifeiyue@meizu.com"
-    }
-  ],
-  "name": "vue-datepicker-local",
+  "name": "lovue-datepicker",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weifeiyue/vue-datepicker-local.git"
+    "url": "git+https://github.com/cooltowi/lovue-datepicker.git"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot"
   },
-  "version": "1.0.9"
+  "version": "1.1.1"
 }
