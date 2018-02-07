@@ -81,11 +81,12 @@
         text() {
             const val = this.value
             const txt = this.dates.map(date => this.tf(date)).join(` ${this.rangeSeparator} `)
-            if (Array.isArray(val)) {
-                return val.length > 1 ? txt : ''
-            } else {
-                return val ? txt : ''
-            }
+            return txt
+//            if (Array.isArray(val)) {
+//                return val.length > 1 ? txt : ''
+//            } else {
+//                return val ? txt : ''
+//            }
         }
     },
     watch: {
