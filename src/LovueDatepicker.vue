@@ -80,7 +80,7 @@
         },
         text() {
             const val = this.value
-            const txt = this.dates.map(date => this.tf(date, 'MM-DD-YYYY')).join(` ${this.rangeSeparator} `)
+            const txt = this.dates.map(date => this.tf(date, 'MM/DD/YYYY')).join(` ${this.rangeSeparator} `)
             //return txt;
             if (Array.isArray(val)) {
                 return val.length > 1 ? txt : ''
