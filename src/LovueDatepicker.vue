@@ -1,6 +1,6 @@
 <template>
     <div class="datepicker" :class="{'datepicker-range':range,'datepicker__clearable':clearable&&text&&!disabled}">
-        <input readonly :value="text" :class="[show ? 'focus' : '', inputClass]" :disabled="disabled"
+        <input readonly :value="tf(value)" :class="[show ? 'focus' : '', inputClass]" :disabled="disabled"
                :placeholder="placeholder" :name="name" v-if="type!=='inline'"/>
         <a class="datepicker-close" @click.stop="cls"></a>
         <transition name="datepicker-anim">
@@ -80,13 +80,13 @@
         },
         text() {
             const val = this.value
-            const txt = this.dates.map(date => this.tf(date)).join(` ${this.rangeSeparator} `)
-            return txt
-//            if (Array.isArray(val)) {
-//                return val.length > 1 ? txt : ''
-//            } else {
-//                return val ? txt : ''
-//            }
+            const txt = this.dates.map(date => this.tf(date, 'MM-DD-YYYY')).join(` ${this.rangeSeparator} `)
+            //return txt;
+            if (Array.isArray(val)) {
+                return val.length > 1 ? txt : ''
+            } else {
+                return txt ? txt : ''
+            }
         }
     },
     watch: {
@@ -113,37 +113,41 @@
             $this.$emit('input', this.text);
             setTimeout(() => {
                 $this.show = $this.range
-            })
+        })
         },
         tf(time, format) {
-            const year = time.getFullYear()
-            const month = time.getMonth()
-            const day = time.getDate()
-            const hours24 = time.getHours()
-            const hours = hours24 % 12 === 0 ? 12 : hours24 % 12
-            const minutes = time.getMinutes()
-            const seconds = time.getSeconds()
-            const milliseconds = time.getMilliseconds()
-            const dd = t => ('0' + t).slice(-2)
-            const map = {
-                YYYY: year,
-                MM: dd(month + 1),
-                MMM: this.local.months[month],
-                MMMM: this.local.monthsHead[month],
-                M: month + 1,
-                DD: dd(day),
-                D: day,
-                HH: dd(hours24),
-                H: hours24,
-                hh: dd(hours),
-                h: hours,
-                mm: dd(minutes),
-                m: minutes,
-                ss: dd(seconds),
-                s: seconds,
-                S: milliseconds
+            if (typeof time == 'string')
+                time = new Date(time);
+            if (time != null && typeof time == 'object') {
+                const year = time.getFullYear()
+                const month = time.getMonth()
+                const day = time.getDate()
+                const hours24 = time.getHours()
+                const hours = hours24 % 12 === 0 ? 12 : hours24 % 12
+                const minutes = time.getMinutes()
+                const seconds = time.getSeconds()
+                const milliseconds = time.getMilliseconds()
+                const dd = t => ('0' + t).slice(-2)
+                const map = {
+                    YYYY: year,
+                    MM: dd(month + 1),
+                    MMM: this.local.months[month],
+                    MMMM: this.local.monthsHead[month],
+                    M: month + 1,
+                    DD: dd(day),
+                    D: day,
+                    HH: dd(hours24),
+                    H: hours24,
+                    hh: dd(hours),
+                    h: hours,
+                    mm: dd(minutes),
+                    m: minutes,
+                    ss: dd(seconds),
+                    s: seconds,
+                    S: milliseconds
+                }
+                return (format || this.format).replace(/Y+|M+|D+|H+|h+|m+|s+|S+/g, str => map[str])
             }
-            return (format || this.format).replace(/Y+|M+|D+|H+|h+|m+|s+|S+/g, str => map[str])
         },
         dc(e) {
             this.show = this.$el.contains(e.target) && !this.disabled
