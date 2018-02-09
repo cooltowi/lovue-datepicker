@@ -91,7 +91,8 @@
     },
     watch: {
         value(val) {
-            this.dates = this.vi(this.value)
+            if(this.value != '')
+                this.dates = this.vi(this.value)
         },
         text() {
             this.$emit('change', this.text);
@@ -99,7 +100,7 @@
     },
     methods: {
         cls() {
-            this.$emit('input', this.range ? [] : '')
+            this.$emit('input', '')
         },
         vi(val) {
             if (Array.isArray(val)) {
@@ -116,6 +117,8 @@
         })
         },
         tf(time, format) {
+            if (time == '')
+                return '';
             if (typeof time == 'string')
                 time = new Date(time);
             if (time != null && typeof time == 'object') {
