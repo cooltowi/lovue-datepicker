@@ -1,7 +1,7 @@
 <template>
     <div class="datepicker" :class="{'datepicker-range':range,'datepicker__clearable':clearable&&text&&!disabled}">
-        <input readonly :value="tf(value)" :class="[show ? 'focus' : '', inputClass]" :disabled="disabled"
-               :placeholder="placeholder" :name="name" v-if="type!=='inline'"/>
+        <input :value="tf(newVal)" :class="[show ? 'focus' : '', inputClass]" :disabled="disabled"
+               :placeholder="format" :name="name" v-if="type!=='inline'" @change="onChange"/>
         <a class="datepicker-close" @click.stop="cls"></a>
         <transition name="datepicker-anim">
             <div class="datepicker-popup" :class="[popupClass,{'datepicker-inline':type==='inline'}]" tabindex="-1"
@@ -71,7 +71,8 @@
     data() {
         return {
             show: false,
-            dates: this.vi(this.value)
+            dates: this.vi(this.value),
+            newVal: this.value
         }
     },
     computed: {
@@ -79,7 +80,7 @@
             return this.dates.length === 2
         },
         text() {
-            const val = this.value
+            const val = this.newVal;
             const txt = this.dates.map(date => this.tf(date, 'MM/DD/YYYY')).join(` ${this.rangeSeparator} `)
             //return txt;
             if (Array.isArray(val)) {
@@ -92,15 +93,23 @@
     watch: {
         value(val) {
             if(this.value != '')
-                this.dates = this.vi(this.value)
+                this.newVal = this.value;
+        },
+        newVal() {
+            if(this.newVal != '')
+                this.dates = this.vi(this.newVal)
         },
         text() {
-            this.$emit('change', this.text);
+            this.$emit('input', this.text);
         }
     },
     methods: {
         cls() {
             this.$emit('input', '')
+            this.newVal = ''
+        },
+        onChange(ev) {
+            this.newVal = this.tf(ev.target.value);
         },
         vi(val) {
             if (Array.isArray(val)) {
@@ -149,7 +158,9 @@
                     s: seconds,
                     S: milliseconds
                 }
-                return (format || this.format).replace(/Y+|M+|D+|H+|h+|m+|s+|S+/g, str => map[str])
+                if(!isNaN(year))
+                    return (format || this.format).replace(/Y+|M+|D+|H+|h+|m+|s+|S+/g, str => map[str])
+                return ''
             }
         },
         dc(e) {
