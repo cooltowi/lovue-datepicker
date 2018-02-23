@@ -109,6 +109,9 @@
             this.newVal = ''
         },
         onChange(ev) {
+            if(ev.target.value == '') {
+                this.$emit('input', '')
+            }
             this.newVal = this.tf(ev.target.value);
         },
         vi(val) {
