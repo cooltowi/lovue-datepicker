@@ -242,10 +242,6 @@
         padding: 0 34px 0 12px;
         font-size: 14px;
         width: 100%;
-        user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
     }
 
     .datepicker > input.focus {
